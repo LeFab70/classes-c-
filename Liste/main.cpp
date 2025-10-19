@@ -8,7 +8,7 @@
 #include "List.h"
 #include <iomanip>
 using namespace std;
-const unsigned short SIZE = 10;
+// const unsigned short SIZE = 10;
 /******************** Prototypes des fonctions ****************/
 
 int main(void)
@@ -19,8 +19,11 @@ int main(void)
           << endl
           << endl;
      List *liste = new List(); // creer une liste vide
+     // seed pour random
+     srand((unsigned)time(NULL));
+     int size = rand() % 20 + 5; // taille aleatoire entre 5 et 25
      // ajouter des points a la liste
-     for (int i = 0; i < SIZE; i++)
+     for (int i = 0; i < size; i++)
      {
           // avec random
           Point *p = new Point(rand() % 100, rand() % 100); // creer un point dynamique avec coordonnees aleatoires
