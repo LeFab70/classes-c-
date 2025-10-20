@@ -21,6 +21,8 @@ int main(void)
      List *liste = new List(); // creer une liste vide
      // seed pour random
      srand((unsigned)time(NULL));
+     // cas de la liste vide
+     liste->afficher();
      int size = rand() % 20 + 5; // taille aleatoire entre 5 et 25
      // ajouter des points a la liste
      for (int i = 0; i < size; i++)

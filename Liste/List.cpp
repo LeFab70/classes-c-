@@ -52,12 +52,20 @@ void List::ajouterFin(Point p)
         actuel->setSuivant(nouveauNode);
     }
 
+    //delete nouveauNode; // liberation de la memoire occupee par le nouveau node temporaire
     // mise a jour de la quantite de nodes
     this->qunatiteNodes++; // incrementer le compteur de nodes
 }
 
 void List::afficher() const
 {
+    // cas liste vide
+    if (getPremier() == nullptr)
+    {
+        cout << "La liste est vide." << endl;
+        return;
+    }
+
     Node *actuel = getPremier(); // commencer par la tete de la liste
     while (actuel)
     {
