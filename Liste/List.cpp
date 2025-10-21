@@ -113,6 +113,18 @@ void List::enleverDebut()
 
 void List::ajouterDebut(const Point &p)
 {
+
+    // verifier si la liste est vide
+    if (getPremier() == nullptr)
+    {
+        // liste vide, creer un nouveau node et le definir comme premier
+        Node *nouveauNode = new Node(p);
+        this->premier = nouveauNode;
+        this->qunatiteNodes++; // incrementer le compteur de nodes
+        return;
+    }
+
+    // liste non vide
     // creer un nouveau node dynamique
     Node *nouveauNode = new Node(p);
     // lier le nouveau node au premier node actuel
@@ -124,8 +136,11 @@ void List::ajouterDebut(const Point &p)
 
 void List::inverserListe()
 {
-    if (getQuantiteNodes() == 0)
-        return; // liste vide, rien a inverser
+    // Verifier si la liste est vide ou contient un seul node
+    if (getQuantiteNodes() <= 1)
+        return; // rien a inverser
+
+    // Initialiser les pointeurs la liste n'est pas vide ou contient plus de un node
     Node *precedent = nullptr;
     Node *actuel = getPremier();
     Node *suivant = nullptr;
