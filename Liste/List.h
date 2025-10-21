@@ -15,6 +15,10 @@ public:
     ~List();
     Node *getPremier() const;
     int getQuantiteNodes() const;
-    void ajouterFin(Point p);
+    void ajouterFin(const Point &p);
     void afficher() const;
+    void enleverFin();
+    void enleverDebut();
+    void ajouterDebut(const Point &p);
+    void inverserListe();
 };

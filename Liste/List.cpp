@@ -29,7 +29,7 @@ int List::getQuantiteNodes() const
     return this->qunatiteNodes;
 }
 
-void List::ajouterFin(Point p)
+void List::ajouterFin(const Point &p)
 {
     // creer un nouveau node dynamique
     Node *nouveauNode = new Node(p);
@@ -52,8 +52,8 @@ void List::ajouterFin(Point p)
         actuel->setSuivant(nouveauNode);
     }
 
-    //delete nouveauNode; // liberation de la memoire occupee par le nouveau node temporaire
-    // mise a jour de la quantite de nodes
+    // delete nouveauNode; // liberation de la memoire occupee par le nouveau node temporaire
+    //  mise a jour de la quantite de nodes
     this->qunatiteNodes++; // incrementer le compteur de nodes
 }
 
@@ -72,4 +72,69 @@ void List::afficher() const
         actuel->getDonnee().afficher(); // afficher le point du node actuel
         actuel = actuel->getSuivant();  // passer au node suivant
     }
+}
+
+void List::enleverFin()
+{
+    if (getQuantiteNodes() == 0)
+        return; // liste vide, rien a enlever
+
+    if (getQuantiteNodes() == 1)
+    {
+        // un seul node dans la liste
+        delete getPremier();     // liberer la memoire occupee par le seul node
+        this->premier = nullptr; // mettre a jour le premier node
+    }
+    else
+    {
+        // plus d'un node dans la liste, parcourir jusqu'au deuxieme dernier node
+        Node *actuel = getPremier();
+        while (actuel->getSuivant()->getSuivant()) // ici on arrete au deuxieme dernier node, getSuivant()->getSuivant() verifie si le suivant du suivant est null
+        {
+            actuel = actuel->getSuivant(); // avancer au node suivant
+        }
+        // supprimer le dernier node
+        delete actuel->getSuivant(); // liberer la memoire occupee par le dernier node
+        actuel->setSuivant(nullptr); // mettre a jour le deuxieme dernier node
+    }
+    this->qunatiteNodes--; // decrementer le compteur de nodes
+}
+
+void List::enleverDebut()
+{
+    if (getQuantiteNodes() == 0)
+        return; // liste vide, rien a enlever
+
+    Node *temporaire = getPremier();            // stocker le premier node
+    this->premier = getPremier()->getSuivant(); // mettre a jour le premier node
+    delete temporaire;                          // liberer la memoire occupee par l'ancien premier node
+    this->qunatiteNodes--;                      // decrementer le compteur de nodes
+}
+
+void List::ajouterDebut(const Point &p)
+{
+    // creer un nouveau node dynamique
+    Node *nouveauNode = new Node(p);
+    // lier le nouveau node au premier node actuel
+    nouveauNode->setSuivant(getPremier());
+    // mettre a jour le premier node de la liste
+    this->premier = nouveauNode;
+    this->qunatiteNodes++; // incrementer le compteur de nodes
+}
+
+void List::inverserListe()
+{
+    if (getQuantiteNodes() == 0)
+        return; // liste vide, rien a inverser
+    Node *precedent = nullptr;
+    Node *actuel = getPremier();
+    Node *suivant = nullptr;
+    while (actuel)
+    {
+        suivant = actuel->getSuivant(); // stocker le node suivant
+        actuel->setSuivant(precedent);  // inverser le lien
+        precedent = actuel;             // avancer precedent
+        actuel = suivant;               // avancer actuel
+    }
+    this->premier = precedent; // mettre a jour le premier node
 }
