@@ -25,6 +25,20 @@ int main(void)
      cout << "Chaine 2 (chaine initialisee): ";
      chaine2->afficher();                                                 // afficher chaine2
      cout << "Longueur de la chaine 2: " << chaine2->getLength() << endl; // afficher longueur chaine2
+     cout << "Le caractere a la position 7 de la chaine 2 est : " << chaine2->getChar(7) << endl;
+
+     // Maj chaine1
+     chaine1->setBuffer("Ceci est une nouvelle chaine pour chaine1");
+     chaine1->afficher();
+
+     // Creation d'une chaine avec le constructeur a deux parametres
+     MyString chaine3(10, '*');
+     cout << "Chaine 3 (chaine avec constructeur a deux parametres): ";
+     chaine3.afficher();
+
+     MyString chaine4(15);
+     cout << "Chaine 4 (chaine avec constructeur a deux parametres et parametre par defaut): ";
+     chaine4.afficher();
 
      // liberation de la memoire
 
