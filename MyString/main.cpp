@@ -40,6 +40,8 @@ int main(void)
      cout << "Chaine 4 (chaine avec constructeur a deux parametres et parametre par defaut): ";
      chaine4.afficher();
 
+     // strcpy(chaine4.getBuffer(),"Hello World!");// modification directe du buffer impossible car getBuffer retourne un pointeur constant
+
      // liberation de la memoire
 
      delete chaine1;

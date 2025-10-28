@@ -19,6 +19,10 @@ public:
     char getChar(int position) const;     // methode retourne un caractere a une position donnee
     void afficher() const;     // methode pour afficher la chaine de caracteres
 
-    char* getBuffer() const; // methode pour obtenir le buffer de la chaine
+ //retourne une adresse  constante vers le buffer pour empecher la modification directe
+    const char* getBuffer() const; // methode pour obtenir le buffer de la chaine
+     //const le premier const le second 
+     //le premier const indique que la methode ne modifie pas l'objet MyString, le type de retour est un pointeur vers un caractere constant
+     // le second c pour des valeurs constantes
     void setBuffer(const char* str); // methode pour definir le buffer de la chaine
 };
