@@ -13,7 +13,8 @@ public:
     MyString();                // constructeur par defaut
     MyString(const char *str); // constructeur avec parametre
     MyString(int nbreCaractere,const char str='-'); // constructeur avec parametre et parametre par defaut de remplissage
-
+    MyString(const MyString &original); // constructeur de copie deep copie /copie en pronfondeur
+   
     ~MyString();               // destructeur
     int getLength() const;     // methode pour obtenir la longueur de la chaine
     char getChar(int position) const;     // methode retourne un caractere a une position donnee
@@ -25,4 +26,9 @@ public:
      //le premier const indique que la methode ne modifie pas l'objet MyString, le type de retour est un pointeur vers un caractere constant
      // le second c pour des valeurs constantes
     void setBuffer(const char* str); // methode pour definir le buffer de la chaine
+
+
+    //Redefion de l'operateur d'affectation, //retourne une reference vers l'objet courant pour permettre les affectations en chaine
+    //copie en shallow /copie en surface
+    MyString& operator=(const MyString& other);
 };

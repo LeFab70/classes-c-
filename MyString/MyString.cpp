@@ -43,6 +43,13 @@ MyString::MyString(int nbreCaractere, const char str)
                                  // }
 }
 
+// constructeur de copie
+MyString::MyString(const MyString &original)
+{
+    // appel de setBuffer pour eviter la duplication de code
+    setBuffer(original.buf);
+}
+
 MyString::~MyString()
 {
     // on fait delete[] car buf est un tableau dynamique
@@ -88,12 +95,12 @@ void MyString::setBuffer(const char *str)
             this->buf = new char[this->len + 1]; // allouer de la memoire pour la nouvelle chaine
                                                  // strcpy(this->buf, str);              // copier la nouvelle chaine dans le buffer
             // copie securisée
-            //strcpy_s(this->buf, this->len + 1, str);
+            // strcpy_s(this->buf, this->len + 1, str);
             strncpy(this->buf, str, this->len - 1);
             this->buf[this->len] = '\0'; // assurer la terminaison de la chaine
         }
     }
-    catch(bad_alloc &e)
+    catch (bad_alloc &e)
     {
         cerr << "Erreur d'allocation de memoire: " << e.what() << '\n';
         this->buf = new char[1]{'\0'}; // reinitialiser a une chaine vide en cas d'erreur
@@ -105,4 +112,10 @@ void MyString::setBuffer(const char *str)
         cerr << e.what() << '\n';
         exit(EXIT_FAILURE);
     }
+}
+//redefinition de l'operateur d'affectation
+MyString &MyString::operator=(const MyString &other)
+{
+    setBuffer(other.buf);
+    return *this; // retourner une reference vers l'objet courant
 }

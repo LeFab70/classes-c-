@@ -46,6 +46,29 @@ int main(void)
 
      delete chaine1;
      delete chaine2;
+
+     // Test others
+     cout << "Test autres methodes: " << endl;
+
+     MyString *nom = new MyString("Fabrice");
+     MyString *nom2 = new MyString();
+     nom2 = nom; // affectation de l'adresse de nom a nom2
+     MyString *nom3 = new MyString();
+     *nom3 = *nom; // copie du contenu de nom dans nom3
+     cout << "Nom 1: ";
+     nom->afficher();
+     cout << "Nom 2: ";
+     nom2->afficher();
+     MyString *copie = new MyString(*nom); // appel du constructeur de copie
+
+     delete nom3; // ceci genere une erreur car nom3 pointe vers une adresse deja liberee
+     delete copie;// ceci genere une erreur car copie pointe vers une adresse deja liberee
+     //pour eviter ceci il faut implement soit meme le constructeur de copie et l'operateur d'affectation
+     //copie en profondeur et copie superficielle
+     
+     delete nom;// libere la memoire de nom
+     delete nom2;
+
      cout << endl
           << endl
           << "Fermeture du programme, \n pressez surla touche entrée,pour quitter le programme"
