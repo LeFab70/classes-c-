@@ -123,21 +123,32 @@ void MyString::append(const char *other)
 {
     if (other == nullptr)
         return;
+    try
+    {
 
-    int otherLen = strlen(other);
-    char *newBuf = new char[this->len + otherLen + 1];
+        int otherLen = strlen(other);
+        char *newBuf = new char[this->len + otherLen + 1];
 
-    // Copier la chaîne actuelle
-    memcpy(newBuf, this->buf, this->len);
-    // Copier l'autre chaîne
-    memcpy(newBuf + this->len, other, otherLen);
+        // Copier la chaîne actuelle
+        memcpy(newBuf, this->buf, this->len);
+        // Copier l'autre chaîne
+        memcpy(newBuf + this->len, other, otherLen);
 
-cout << "Debug: newBuf after append: " << newBuf << endl;
-cout << "Debug: this->len: " << this->len << ", otherLen: " << otherLen << endl;
-    // Terminer avec '\0'
-    newBuf[this->len + otherLen] = '\0';
+        cout << "Debug: newBuf after append: " << newBuf << endl;
+        cout << "Debug: this->len: " << this->len << ", otherLen: " << otherLen << endl;
+        // Terminer avec '\0'
+        newBuf[this->len + otherLen] = '\0';
 
-    delete[] this->buf;
-    this->buf = newBuf;
-    this->len += otherLen;
+        delete[] this->buf;
+        this->buf = newBuf;
+        this->len += otherLen;
+    }
+    catch (const std::bad_alloc &e)
+    {
+        std::cerr << "Erreur d'allocation de memoire: " << e.what() << '\n';
+    }
+    catch (const std::exception &e)
+    {
+        std::cerr << e.what() << '\n';
+    }
 }
