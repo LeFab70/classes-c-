@@ -47,6 +47,14 @@ int main(void)
      delete chaine1;
      delete chaine2;
 
+
+
+      MyString *chaine5 = new MyString("Hello ");
+     chaine5->append("World!"); // concatener une autre chaine
+     cout << "Chaine 5 apres concatenation: ";
+     chaine5->afficher();
+     
+     delete chaine5;
      // Test others
      cout << "Test autres methodes: " << endl;
 
@@ -69,11 +77,7 @@ int main(void)
      delete nom; // libere la memoire de nom
      delete nom2;
 
-     MyString *chaine5 = new MyString("Hello ");
-     chaine5->append("World!"); // concatener une autre chaine
-     cout << "Chaine 5 apres concatenation: ";
-     chaine5->afficher();
-     delete chaine5;
+    
 
      cout << endl
           << endl

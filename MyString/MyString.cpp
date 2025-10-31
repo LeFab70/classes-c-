@@ -87,23 +87,21 @@ void MyString::setBuffer(const char *str)
     {
         if (str == nullptr)
         {
-            MyString(); // appeler le constructeur par defaut si str est null
+            this->buf = new char[1]{'\0'};
+            this->len = 0;
         }
         else
         {
             this->len = strlen(str);             // obtenir la longueur de la chaine
             this->buf = new char[this->len + 1]; // allouer de la memoire pour la nouvelle chaine
-                                                 // strcpy(this->buf, str);              // copier la nouvelle chaine dans le buffer
-            // copie securisée
-            // strcpy_s(this->buf, this->len + 1, str);
-            strncpy(this->buf, str, this->len - 1);
-            this->buf[this->len] = '\0'; // assurer la terminaison de la chaine
+            strncpy(this->buf, str, this->len);  // copier tous les caractères
+            this->buf[this->len] = '\0';         // assurer la terminaison de la chaine
         }
     }
     catch (bad_alloc &e)
     {
         cerr << "Erreur d'allocation de memoire: " << e.what() << '\n';
-        this->buf = new char[1]{'\0'}; // reinitialiser a une chaine vide en cas d'erreur
+        this->buf = new char[1]{'\0'};
         this->len = 0;
         exit(EXIT_FAILURE);
     }
@@ -113,6 +111,7 @@ void MyString::setBuffer(const char *str)
         exit(EXIT_FAILURE);
     }
 }
+
 // redefinition de l'operateur d'affectation
 MyString &MyString::operator=(const MyString &other)
 {
@@ -123,19 +122,22 @@ MyString &MyString::operator=(const MyString &other)
 void MyString::append(const char *other)
 {
     if (other == nullptr)
-    {
-        return; // rien a faire si other est null
-    }
-    int otherLen = strlen(other);                      // obtenir la longueur de l'autre chaine
-    char *newBuf = new char[this->len + otherLen + 1]; // allouer de la memoire pour la nouvelle chaine
+        return;
 
-    // avec strncpy
-    strncpy(newBuf, this->buf, this->len);        // copier la chaine courante dans le nouveau buffer
-    strncpy(newBuf + this->len, other, otherLen); // copier l'autre chaine a la fin du nouveau buffer
-    newBuf[this->len + otherLen] = '\0';          // ajouter le caractere de fin de chaine
+    int otherLen = strlen(other);
+    char *newBuf = new char[this->len + otherLen + 1];
 
-    delete[] this->buf; // liberer l'ancien buffer
+    // Copier la chaîne actuelle
+    memcpy(newBuf, this->buf, this->len);
+    // Copier l'autre chaîne
+    memcpy(newBuf + this->len, other, otherLen);
 
-    this->buf = newBuf;    // mettre a jour le buffer avec la nouvelle chaine
-    this->len += otherLen; // mettre a jour la longueur de la chaine
+cout << "Debug: newBuf after append: " << newBuf << endl;
+cout << "Debug: this->len: " << this->len << ", otherLen: " << otherLen << endl;
+    // Terminer avec '\0'
+    newBuf[this->len + otherLen] = '\0';
+
+    delete[] this->buf;
+    this->buf = newBuf;
+    this->len += otherLen;
 }
