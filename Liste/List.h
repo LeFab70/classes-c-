@@ -21,4 +21,5 @@ public:
     void enleverDebut();
     void ajouterDebut(const Point &p);
     void inverserListe();
+    void viderListe();
 };

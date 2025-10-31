@@ -1,7 +1,7 @@
 /*****************************************************************
      Programmer: Fabrice Kouonang
      Fraction:       08/09/2025
-     But:        gestion des noeuds dune liste en C++
+     But:        class string en C++
      version:    1.0
 ******************************************************************/
 #include <iostream>
@@ -50,10 +50,10 @@ int main(void)
      {
           if (current != nullptr)
           {
-               //Point p = current->getDonnee();
-               //cout << "Node " << i + 1 << ": (" << p.getX() << ", " << p.getY() << ")" << endl;
+               // Point p = current->getDonnee();
+               // cout << "Node " << i + 1 << ": (" << p.getX() << ", " << p.getY() << ")" << endl;
 
-               current->getDonnee().afficher(); //getDonnee() accede à afficher() car retourne un Point
+               current->getDonnee().afficher(); // getDonnee() accede à afficher() car retourne un Point
                current = current->getSuivant(); // passer au noeud suivant
           }
           else
@@ -64,7 +64,7 @@ int main(void)
 
      while (current)
      {
-          current->getDonnee().afficher(); //getDonnee() accede à afficher() car retourne un Point
+          current->getDonnee().afficher(); // getDonnee() accede à afficher() car retourne un Point
           current = current->getSuivant();
      }
 

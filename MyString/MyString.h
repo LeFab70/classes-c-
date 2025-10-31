@@ -31,4 +31,5 @@ public:
     //Redefion de l'operateur d'affectation, //retourne une reference vers l'objet courant pour permettre les affectations en chaine
     //copie en shallow /copie en surface
     MyString& operator=(const MyString& other);
+    void append(const char* other); //methode pour concatener une autre chaine a la fin de la chaine courante
 };

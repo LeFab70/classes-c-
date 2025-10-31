@@ -113,9 +113,29 @@ void MyString::setBuffer(const char *str)
         exit(EXIT_FAILURE);
     }
 }
-//redefinition de l'operateur d'affectation
+// redefinition de l'operateur d'affectation
 MyString &MyString::operator=(const MyString &other)
 {
     setBuffer(other.buf);
     return *this; // retourner une reference vers l'objet courant
+}
+// methode pour concatener une autre chaine a la fin de la chaine courante
+void MyString::append(const char *other)
+{
+    if (other == nullptr)
+    {
+        return; // rien a faire si other est null
+    }
+    int otherLen = strlen(other);                      // obtenir la longueur de l'autre chaine
+    char *newBuf = new char[this->len + otherLen + 1]; // allouer de la memoire pour la nouvelle chaine
+
+    // avec strncpy
+    strncpy(newBuf, this->buf, this->len);        // copier la chaine courante dans le nouveau buffer
+    strncpy(newBuf + this->len, other, otherLen); // copier l'autre chaine a la fin du nouveau buffer
+    newBuf[this->len + otherLen] = '\0';          // ajouter le caractere de fin de chaine
+
+    delete[] this->buf; // liberer l'ancien buffer
+
+    this->buf = newBuf;    // mettre a jour le buffer avec la nouvelle chaine
+    this->len += otherLen; // mettre a jour la longueur de la chaine
 }

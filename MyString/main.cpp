@@ -61,13 +61,19 @@ int main(void)
      nom2->afficher();
      MyString *copie = new MyString(*nom); // appel du constructeur de copie
 
-     delete nom3; // ceci genere une erreur car nom3 pointe vers une adresse deja liberee
-     delete copie;// ceci genere une erreur car copie pointe vers une adresse deja liberee
-     //pour eviter ceci il faut implement soit meme le constructeur de copie et l'operateur d'affectation
-     //copie en profondeur et copie superficielle
-     
-     delete nom;// libere la memoire de nom
+     delete nom3;  // ceci genere une erreur car nom3 pointe vers une adresse deja liberee
+     delete copie; // ceci genere une erreur car copie pointe vers une adresse deja liberee
+     // pour eviter ceci il faut implement soit meme le constructeur de copie et l'operateur d'affectation
+     // copie en profondeur et copie superficielle
+
+     delete nom; // libere la memoire de nom
      delete nom2;
+
+     MyString *chaine5 = new MyString("Hello ");
+     chaine5->append("World!"); // concatener une autre chaine
+     cout << "Chaine 5 apres concatenation: ";
+     chaine5->afficher();
+     delete chaine5;
 
      cout << endl
           << endl

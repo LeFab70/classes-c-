@@ -9,14 +9,7 @@ List::List()
 List::~List()
 {
     // liberation de la memoire occupee par les nodes
-    Node *actuel = this->premier;
-    Node *temporaire;
-    while (actuel != nullptr)
-    {
-        temporaire = actuel;
-        actuel = actuel->getSuivant();
-        delete temporaire; // appel du destructeur de Node
-    }
+    viderListe();
 }
 
 Node *List::getPremier() const
@@ -152,4 +145,18 @@ void List::inverserListe()
         actuel = suivant;               // avancer actuel
     }
     this->premier = precedent; // mettre a jour le premier node
+}
+
+void List::viderListe()
+{
+    Node *actuel = this->premier;
+    Node *temporaire;
+    while (actuel != nullptr)
+    {
+        enleverDebut(); // reutiliser la methode enleverDebut pour liberer chaque node
+        // temporaire = actuel;
+        // actuel = actuel->getSuivant();
+        // delete temporaire;     // appel du destructeur de Node
+        // this->qunatiteNodes--; //? est utile?
+    }
 }
