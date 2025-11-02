@@ -110,6 +110,7 @@ int MyArray::find(const int element) const
     catch (const std::exception &e)
     {
         std::cerr << e.what() << '\n';
+        return -1; // en cas d'exception, retourner -1
     }
 }
 int MyArray::getAt(const int index) const
