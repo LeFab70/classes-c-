@@ -10,9 +10,13 @@ private:
     int len;   // longueur de la chaine de caracteres
 
 public:
+
+//par defaut pour obligé user a utiliser les constructeurs
+//il faut definir le constructeur avec le mot cle explicit pour eviter les conversions implicites
+
     MyString();                // constructeur par defaut
-    MyString(const char *str); // constructeur avec parametre
-    MyString(int nbreCaractere,const char str='-'); // constructeur avec parametre et parametre par defaut de remplissage
+   explicit MyString(const char *str); // constructeur avec parametre
+   explicit MyString(int nbreCaractere,const char str='-'); // constructeur avec parametre et parametre par defaut de remplissage
     MyString(const MyString &original); // constructeur de copie deep copie /copie en pronfondeur
    
     ~MyString();               // destructeur
