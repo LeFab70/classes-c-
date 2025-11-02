@@ -51,9 +51,6 @@ int main(void)
      }
 
      cout << endl;
-     // suppression de tous les elements
-     array1->removeAll();
-     cout << "Taille du tableau apres suppression de tous les elements: " << array1->getSize() << endl;
 
      // construceur avec parametre
 
@@ -81,6 +78,11 @@ int main(void)
      cout << "Premier element du tableau copie (begin): " << *(copie->begin()) << endl;
      cout << "Dernier element du tableau copie (back): " << *(copie->back()) << endl;
 
+     // suppression de tous les elements
+     array1->removeAll();
+     cout << "Taille du tableau apres suppression de tous les elements: " << array1->getSize() << endl;
+     // taill de copie apres suppression de tous les elements de array1
+     cout << "Taille du tableau copie apres suppression de tous les elements de array1: " << copie->getSize() << endl;
      // liberation de la memoire
      delete array1;
      delete copie;
