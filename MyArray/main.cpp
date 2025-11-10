@@ -1,7 +1,7 @@
 /*****************************************************************
      Programmer: Fabrice Kouonang
-     Fraction:      03/10/2025
-     But:        class Array en C++
+     MyArray:      03/11/2025
+     But:        Devoir 2 - Classe MyArray en C++
      version:    1.0
 ******************************************************************/
 #include <iostream>

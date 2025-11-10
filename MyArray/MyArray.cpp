@@ -1,7 +1,7 @@
 /*****************************************************************
      Programmer: Fabrice Kouonang
-     Fraction:      03/10/2025
-     But:        class Array en C++
+     MyArray      03/11/2025
+     But:        Devoir 2 - Classe MyArray en C++
      version:    1.0
 ******************************************************************/
 
@@ -15,18 +15,25 @@ MyArray::MyArray() : tableau(nullptr), taille(0)
 
 MyArray::MyArray(const MyArray &original)
 {
-    this->taille = original.taille;
-    if (this->taille > 0)
+    try
     {
-        this->tableau = new int[this->taille];
-        for (unsigned int i = 0; i < this->taille; i++)
+        this->taille = original.taille;
+        if (this->taille > 0)
         {
-            this->tableau[i] = original.tableau[i];
+            this->tableau = new int[this->taille];
+            for (unsigned int i = 0; i < this->taille; i++)
+            {
+                this->tableau[i] = original.tableau[i];
+            }
+        }
+        else
+        {
+            this->tableau = nullptr;
         }
     }
-    else
+    catch (const std::exception &e)
     {
-        this->tableau = nullptr;
+        std::cerr << e.what() << '\n';
     }
 }
 MyArray::~MyArray()
