@@ -129,6 +129,10 @@ void Fraction::afficherDecimal(void) const
     cout << (float)this->num / this->den;
 }
 
+float Fraction::afficherDecima(void) const
+{
+    cout << (float)this->num / this->den;
+}
 int Fraction::euclide(int a, int b)
 {
     if (b == 0)
@@ -155,3 +159,40 @@ void Fraction::simplifierAlteree(void)
     this->setNum(this->num / pgcd);
     this->setDen(this->den / pgcd);
 }
+
+ostream &operator<<(ostream &out, const Fraction &obj)
+{
+    out << obj.num << "/" << obj.den;
+    return out;
+}
+
+istream &operator<<(istream &in, Fraction &obj)
+{
+int num, deno;
+	char slash; //pour lire le caractere '/'
+	cout << "Entrez une fraction sous la forme a/b : ";
+	in >> num >> slash >> deno;
+	obj.setNum(num);
+	obj.setDen(deno);
+	return in;
+}
+bool operator==(const Fraction &gauche, const Fraction &droite)
+{
+    return gauche.afficherDecima() == droite.afficherDecima();
+}
+bool operator<(const Fraction &gauche, const Fraction &droite)
+{
+    return gauche.afficherDecima() > droite.afficherDecima();
+}
+
+Fraction operator+(const Fraction &gauche, const Fraction &droite)
+{
+    return gauche.additionner(droite);
+}
+
+//methode membreon a access a this
+ Fraction& Fraction::operator+(const Fraction& obj) {
+    this->ajouter(obj);
+    return *this;
+  };
+

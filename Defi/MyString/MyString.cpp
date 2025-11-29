@@ -29,10 +29,10 @@ MyString::MyString(const char cara) // constructeur d'un caractere (Erreur)
 
 	buf[0] = cara;
 	buf[1] = '\0';
-	//cout << "Constructeur d'un caractere appele" << endl;
-	//cout << "Adresse de l'objet: " << this << endl;
-	//cout << "Caractere: " << cara << endl;
-	//cout << "Adresse du buffer: " << (void *)buf << endl;
+	// cout << "Constructeur d'un caractere appele" << endl;
+	// cout << "Adresse de l'objet: " << this << endl;
+	// cout << "Caractere: " << cara << endl;
+	// cout << "Adresse du buffer: " << (void *)buf << endl;
 }
 
 MyString::MyString(int longueur, char cara)
@@ -85,7 +85,7 @@ char MyString::getChar(int index) const
 void MyString::afficher() const
 {
 	if (buf)
-		cout << buf<< endl;
+		cout << buf << endl;
 }
 
 char *MyString::getBuffer() const
@@ -191,3 +191,94 @@ void MyString::append(const MyString &obj)
 
 	buf = temp;
 }
+
+// definition des fonctions friend pour comparer deux objets MyString
+bool operator==(const MyString &gauche, const MyString &droite)
+{
+	return strcmp(gauche.buf, droite.buf) == 0;
+}
+
+bool operator!=(const MyString &gauche, const MyString &droite)
+{
+	return !(gauche == droite);
+}
+bool operator<(const MyString &gauche, const MyString &droite)
+{
+	return strcmp(gauche.buf, droite.buf) < 0;
+}
+
+bool operator<=(const MyString &gauche, const MyString &droite)
+{
+	// avec strcmp
+	// return strcmp(gauche.buf, droite.buf) <= 0;
+	return (gauche < droite) || (gauche == droite);
+}
+bool operator>(const MyString &gauche, const MyString &droite)
+{
+	return !(gauche <= droite);
+}
+bool operator>=(const MyString &gauche, const MyString &droite)
+{
+	return !(gauche < droite);
+}
+MyString operator+(const MyString &gauche, const MyString &droite)
+{
+	MyString resultat;
+	resultat.len = gauche.len + droite.len;
+
+	// reserver l'espsace memoire
+	try
+	{
+		resultat.buf = new char[resultat.len + 1];
+	}
+	catch (bad_alloc)
+	{
+		exit(-1);
+	}
+
+	// copier les chaines dans le nouvelle emplacement
+	strcpy(resultat.buf, gauche.buf);
+	strcat(resultat.buf, droite.buf);
+
+	return resultat;
+}
+ostream &operator<<(ostream &out, const MyString &obj)
+{
+	out << obj.buf;
+	return out;
+}
+istream &operator>>(istream &in, MyString &obj)
+{
+	char temp[1000]; // tampon temporaire
+
+	in >> temp; // lire la chaine dans le tampon
+
+	obj.setBuffer(temp); // utiliser setBuffer pour initialiser l'objet
+
+	return in;
+}
+// MyString &operator+=(MyString &gauche, const MyString &droite)
+// {
+// 	gauche.append(droite);
+// 	return gauche;
+// }
+
+// avec methode membre de +=
+MyString &MyString::operator+=(const MyString &obj)
+{
+	this->append(obj);
+	return *this;
+}
+
+// la methode pour tester si la chaine est vide, methode membre
+// acces a this
+bool MyString::operator!() const
+{
+	return len == 0;
+}
+
+// surcharge du casting operator const char*()
+// MyString::operator const char *() const
+// {
+// 	return buf;
+// }

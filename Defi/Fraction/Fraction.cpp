@@ -133,3 +133,19 @@ void Fraction::inverser()
 	if(this->numerateur) //assure que le numerateur n'est pas 0
 		swap(this->numerateur,this->denominateur);
 }
+
+ostream& operator<<(ostream &out, const Fraction &obj)
+{
+	out<<obj.getNumerateur()<<"/"<<obj.getDenominateur();
+    return out;
+}
+
+istream& operator<<(istream &in, Fraction &obj)
+{
+    return in;
+}
+
+bool operator==(const Fraction &gauche, const Fraction &droite)
+{
+    return false;
+}

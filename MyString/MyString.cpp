@@ -151,4 +151,11 @@ void MyString::append(const char *other)
     {
         std::cerr << e.what() << '\n';
     }
+
+    // definir les methodes friends
+    // bool operator==(const MyString &gauche, const MyString &droite)
+    // {
+    //     return strcmp(gauche.buf, droite.buf) == 0;
+    // }
+    
 }

@@ -17,3 +17,4 @@ public:
     Point getDonnee() const;
     Node *getSuivant() const;
 };
+

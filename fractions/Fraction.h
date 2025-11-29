@@ -4,6 +4,13 @@
 using namespace std;
 class Fraction
 {
+    // Fonction friend (methode non membres) -- pas access a this
+    friend ostream &operator<<(ostream &out, const Fraction &obj);
+    friend istream &operator<<(istream &in, Fraction &obj);
+    friend bool operator==(const Fraction &gauche, const Fraction &droite);
+    friend bool operator<(const Fraction &gauche, const Fraction &droite);
+    friend Fraction operator+(const Fraction& ,const Fraction&);
+
 private:
     int num; // numerateur
     int den; // denominateur
@@ -35,4 +42,10 @@ public:
     void afficherDecimal(void) const;
     // Fraction simplifier(void) const;
     void simplifierAlteree(void);
+    float Fraction::afficherDecima(void) const;
+
+    //methodes membres, ici on a access a this object courant
+    Fraction& operator+(const Fraction&);
+   // Fraction& operator-(const Fraction&);
+   // Fraction& operator*(const Fraction&);
 };

@@ -90,13 +90,20 @@ int main(void)
      Coin *cent2 = new Coin();
      do
      {
-          cent1->flipMt();
-          cent2->flipMt();
-          cout << " Cent1 : ";
-          cent1->afficher();
-          cout << "\t\t Cent2 : ";
-          cent2->afficher();
-          cout << endl;
+           //cent1->flipMt();
+          //cent2->flipMt();
+
+          cent1++;
+          ++cent2;
+          // cout << " Cent1 : ";
+          // cent1->afficher();
+          // cout << "\t\t Cent2 : ";
+          // cent2->afficher();
+          // cout << endl;
+
+          // simplifié par out
+          cout << "cent1: " << *cent1 << "\t cent2: " << *cent2 << endl;
+
           cent1->isHeads() ? headsOne++ : headsOne = 0;
           cent2->isHeads() ? headsTwo++ : headsTwo = 0;
           // verifier si l'un des deux a fait 3 heads de suite

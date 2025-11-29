@@ -14,6 +14,10 @@
 using namespace std;
 class Coin
 {
+
+    // Methode friends, les access aux proprietés sont differentes
+    friend ostream &operator<<(ostream &out, const Coin &obj);//tjrs une reference constante
+
 private:
     bool face;
     MTRand randMT; // instance du generateur de nombres aleatoires
@@ -34,4 +38,8 @@ public:
     static const bool TAILS;
 
     void flipMt(void);
+
+    // ajout de ++ pour effectuer un flip
+    Coin &operator++();    //=>++coin
+    Coin &operator++(int); //=>coin++
 };

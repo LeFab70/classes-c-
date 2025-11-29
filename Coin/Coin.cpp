@@ -51,5 +51,23 @@ bool Coin::isHeads(void) const
 // utiliser le generateur de nombres aleatoires Mersenne Twister
 void Coin::flipMt(void)
 {
-    face = (randMT.randInt(1) == 0) ? false : true;
+    //face = (randMT.randInt(1) == 0) ? false : true;
+    face=randMT.randInt(1);
+}
+
+Coin &Coin::operator++()
+{
+    this->flipMt();
+    return *this;
+}
+Coin &Coin::operator++(int)
+{
+    this->flipMt();
+    return *this;
+}
+
+ostream &operator<<(ostream &out, const Coin &obj)
+{
+    out << ((obj.face == Coin::HEADS) ? "Heads" : "Tails");
+    return out;
 }
